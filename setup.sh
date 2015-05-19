@@ -3,12 +3,12 @@
 rails new trapp -d postgresql --skip-bundle
 cd trapp
 
-echo "gem 'devise'" >> Gemfile
+# echo "gem 'devise'" >> Gemfile
 bundle install
 
-rails g devise:install
-rails g devise User
-rails g resource  profile   user:belongs_to name_first:string name_last:string github:string email:string phone:string
+# rails g devise:install
+# rails g devise User
+rails g resource  user        name_first:string name_last:string github:string email:string phone:string
 
 rails g model     record
 rails g model     comment     record:belongs_to content:string
@@ -29,3 +29,8 @@ rails g model     assignment  record:belongs_to lesson:belongs_to day:belongs_to
 rake db:drop
 rake db:create
 rake db:migrate
+
+mkdir app/views/application
+touch app/views/application/index.html.erb
+# echo '<p class="notice"><%= notice %></p>' >> app/views/application/index.html.erb
+# echo '<p class="alert"><%= alert %></p>' >> app/views/application/index.html.erb

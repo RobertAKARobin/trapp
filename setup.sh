@@ -1,5 +1,6 @@
 #!/bin/bash
 
+rm -rf trapp
 rails new trapp -d postgresql --skip-bundle
 cd trapp
 
@@ -38,16 +39,15 @@ rails g scaffold  comment     record:belongs_to content:string
 
 rails g scaffold  course      record:belongs_to name:string
 rails g scaffold  cohort      record:belongs_to
-rails g scaffold  day         record:belongs_to cohort:belongs_to
 
 rails g scaffold  teacher     record:belongs_to user:belongs_to cohort:belongs_to
 rails g scaffold  student     record:belongs_to user:belongs_to cohort:belongs_to
-rails g scaffold  oneonone    record:belongs_to teacher:belongs_to student:belongs_to day:belongs_to 
-rails g scaffold  attendance  record:belongs_to student:belongs_to day:belongs_to
+rails g scaffold  oneonone    record:belongs_to teacher:belongs_to student:belongs_to 
+rails g scaffold  attendance  record:belongs_to student:belongs_to stat:integer
 
 rails g scaffold  lesson      record:belongs_to name:string
-rails g scaffold  assignment  record:belongs_to lesson:belongs_to
-rails g scaffold  submission  record:belongs_to assignment:belongs_to day:belongs_to student:belongs_to
+rails g scaffold  assignment  record:belongs_to lesson:belongs_to link:string
+rails g scaffold  submission  record:belongs_to assignment:belongs_to student:belongs_to stat:integer link:string
 
 rake db:migrate
 
@@ -62,7 +62,6 @@ Rails.application.routes.draw do
   resources :comments
   resources :courses
   resources :cohorts
-  resources :days
   resources :teachers
   resources :students
   resources :oneonones

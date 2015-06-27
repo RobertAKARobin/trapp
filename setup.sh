@@ -45,9 +45,10 @@ rails g scaffold  student     record:belongs_to user:belongs_to cohort:belongs_t
 rails g scaffold  oneonone    record:belongs_to teacher:belongs_to student:belongs_to 
 rails g scaffold  attendance  record:belongs_to student:belongs_to stat:integer
 
-rails g scaffold  lesson      record:belongs_to name:string
-rails g scaffold  assignment  record:belongs_to lesson:belongs_to link:string
-rails g scaffold  submission  record:belongs_to assignment:belongs_to student:belongs_to stat:integer link:string
+rails g scaffold  assignment  record:belongs_to link:string kind:string assigned:date due:date
+rails g scaffold  submission  record:belongs_to student:belongs_to link:string teacher:belongs_to
+rails g scaffold  criterion                     assignment:belongs_to title:string
+rails g scaffold  grade                         submission:belongs_to criterion:belongs_to stat:string
 
 rake db:migrate
 
